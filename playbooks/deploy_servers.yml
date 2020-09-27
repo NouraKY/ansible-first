@@ -7,6 +7,12 @@
     - "../inventory/group_vars/all_vars.yml"
     - "../inventory/group_vars/servers_vars.yml"
   tasks:
+    - name: Ensure botocore and boto3 modules are installed
+      pip:
+        name: [ "boto3", "botocore" ]
+        extra_args: "--user"
+        tags:
+          - always
     #This task is neccessary to work with dynamic inventory and
     #provide group_vars before actually provisioning
     - name: Add localhost to the group
@@ -52,9 +58,3 @@
       tags:
         - never
         - deletestack
-    - name: Ensure botocore and boto3 modules are installed
-      pip:
-        name: [ "boto3", "botocore"]
-        extra_args: "--user"
-      tags:
-        - always
