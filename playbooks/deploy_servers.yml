@@ -6,7 +6,7 @@
   vars_files:
     - "../inventory/group_vars/all_vars.yml"
     - "../inventory/group_vars/servers_vars.yml"
-  #tasks:
+  tasks:
    # - name: Ensure botocore and boto3 modules are installed
   #    pip:
    #     name: [ "boto3", "botocore" ]

@@ -1,7 +1,6 @@
 ---
 # Define hosting environment
 hosting_infrastructure: aws
-
 # Define AWS region. Comment out the one you DO NOT wish to use with #
 #aws_region: "us-east-1"
 aws_region: "us-west-2"
