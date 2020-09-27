@@ -9,6 +9,12 @@
   tasks:
     #This task is neccessary to work with dynamic inventory and
     #provide group_vars before actually provisioning
+    - name: Ensure boto and boto3 modules are installed
+        pip:
+          name: "{{ item }}"
+        with_items:
+          - boto3
+          - botocore
     - name: Add localhost to the group
       add_host:
         name: localhost
