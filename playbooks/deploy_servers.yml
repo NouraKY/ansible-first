@@ -1,11 +1,8 @@
 
-- name: Ensure boto and boto3 modules are installed
+- name: Ensure botocore and boto3 modules are installed
   pip:
-    name: "{{ item }}"
-  with_items:
-    - boto3
-    - botocore
-  delegate_to: "{{ server_name }}"
+    name: [ "boto3", "botocore"]
+    extra_args: "--user"
 - name: Deploying servers on AWS with CloudFormation
   hosts: servers
   connection: local
