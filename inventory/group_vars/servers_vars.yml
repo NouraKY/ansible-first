@@ -4,31 +4,31 @@
 #aws_image: "{{ aws_image}}"
 
 #   Cloud Formation Stack Name
-stack_name: "myservers"
+stack_name: "myansibleservers"
 
 # SSH Keypair for the instance
-aws_key_name: "ansiblekey"
+aws_key_name: "ansible-key"
 
 #Establish server hostname
-server_name: "server01.ansiblelab.com"
-server_name2: "server02.ansiblelab.com"
+server_name: "server01.norahslab.com"
+server_name2: "server02.norahslab.com"
 
 #Type of AWS instance
 aws_instancetype: "t2.medium"
 
 #Establish  server subnets
-subnet: subnet-09aaee8f8f762ea0c
-subnet2: subnet-0f583c67f9cee3a1e
+subnet: subnet-02b0a3969b70473fb
+subnet2: subnet-02b0a3969b70473fb
 
 # Establish EBS Encryption key
-ebs_key: "ff01e1f8-edfa-44d6-b511-3fc07445765c"
+ebs_key: "178e6f0c-66df-4d24-b790-7fcfb1420c01"
 
 
 # Establish private Route53 DNS zone
-private_hosted_zone: Z0426696BJSKNKQ4L8ET
+private_hosted_zone: Z029757430R72KHNBRMF9
 
 # Establish VPC
-vpc_id: vpc-088f9f20331a59216
+vpc_id: vpc-055332e25c151415f
 
 #Disks to attach to instance
 disks:
