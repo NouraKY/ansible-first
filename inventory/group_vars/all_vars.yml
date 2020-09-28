@@ -18,14 +18,14 @@ aws_image: ami-0528a5175983e7f28
 aws_key_name: "ansible-key"
 
 # Availability zone of resources
-aws_zone: "us-west-2a"
+aws_zone: "us-west-2b"
 #aws_zone: "us-east-1b"
 #aws_zone: "us-east-1c"
 
 
 # Second AZ if multi-AZ is needed during cloudformation deployment
 #aws_zone2: "us-east-1a"
-aws_zone2: "us-west-2b"
+aws_zone2: "us-west-2a"
 #aws_zone2: "us-east-1c"
 
 
