@@ -18,7 +18,7 @@ aws_instancetype: "t2.medium"
 
 #Establish  server subnets
 subnet: subnet-02b0a3969b70473fb
-subnet2: subnet-02b0a3969b70473fb
+subnet2: subnet-03aeeec4c71bb8426
 
 # Establish EBS Encryption key
 ebs_key: "178e6f0c-66df-4d24-b790-7fcfb1420c01"
