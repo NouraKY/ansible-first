@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-               ansiblePlaybook installation: 'ansible', inventory: 'hosts', playbook: 'playbooks/deploy_servers.yml'
+               ansiblePlaybook  inventory: 'hosts', playbook: 'playbooks/deploy_servers.yml'
             }
         }
     }
