@@ -12,7 +12,7 @@ env_id: "norahslab"
 dns_domain: "{{ env_id }}.com"
 
 # Define the AWS default image
-aws_image: ami-000db10762d0c4c05
+aws_image: ami-0528a5175983e7f28
 
 # Set the SSH keypair with EC2 Instances
 aws_key_name: "ansible-key"
