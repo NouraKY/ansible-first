@@ -43,10 +43,6 @@
           AwsZone: "{{aws_zone}}"
           AwsZone2: "{{aws_zone2}}"
           EBSkey: "{{ebs_key}}"
-          #Subnet: "{{subnet01}}"
-          #Subnet2: "{{subnet2}}"
-         # PrivateRoute53HostedZone: "{{private_hosted_zone}}"
-         # VPC: "{{vpc_id}}"
       when: hosting_infrastructure == "aws"
     
     - name: Delete existing AWS cloudformation stack
