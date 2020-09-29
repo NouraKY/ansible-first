@@ -74,15 +74,15 @@ Parameters:
   
 Resources:
 
-
   VPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: !Ref VpcBlock
+      CidrBlock:  !Ref VpcBlock
       EnableDnsSupport: true
       EnableDnsHostnames: true
-
-
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-VPC'
 
   PublicSubnet01:
     Type: AWS::EC2::Subnet
@@ -119,8 +119,6 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-PublicSubnet02"
-
-
 
   server1:
     Type: "AWS::EC2::Instance"
@@ -174,8 +172,6 @@ Resources:
             VolumeSize: !Ref RootVolumeSize
             Encrypted: "true"
             KmsKeyId: !Ref EBSkey
-
-
 
   hostedZone:
     Type: "AWS::Route53::HostedZone"
