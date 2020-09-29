@@ -10,8 +10,8 @@ stack_name: "myansibleservers"
 aws_key_name: "ansible-key"
 
 #Establish server hostname
-server_name: "server01.norahs-eac.com.com"
-server_name2: "server02.norahs-eac.com.com"
+server_name: "server01.norahs-eac.com"
+server_name2: "server02.norahs-eac.com"
 
 #Type of AWS instance
 aws_instancetype: "t2.medium"
