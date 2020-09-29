@@ -2,6 +2,23 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: "CloudFormation template to deploy multiple servers in aws"
 
 Parameters:
+
+
+  VpcBlock:
+    Type: String
+    Default: 192.168.0.0/16
+    Description: The CIDR range for the VPC. This should be a valid private (RFC 1918) CIDR range.
+
+  PublicSubnet01Block:
+    Type: String
+    Default: 192.168.0.0/18
+    Description: CidrBlock for public subnet 01 within the VPC
+
+  PublicSubnet02Block:
+    Type: String
+    Default: 192.168.64.0/18
+    Description: CidrBlock for public subnet 02 within the VPC
+
   Image:
     Description: "EC2 ami to be used"
     Type: "AWS::EC2::Image::Id"
@@ -56,6 +73,55 @@ Parameters:
     Type: "AWS::EC2::VPC::Id"
   
 Resources:
+
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcBlock
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+
+
+
+  PublicSubnet01:
+    Type: AWS::EC2::Subnet
+    Metadata:
+      Comment: Subnet 01
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+          - '0'
+          - Fn::GetAZs:
+              Ref: AWS::Region
+      CidrBlock:
+        Ref: PublicSubnet01Block
+      VpcId:
+        Ref: VPC
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-PublicSubnet01"
+
+  PublicSubnet02:
+    Type: AWS::EC2::Subnet
+    Metadata:
+      Comment: Subnet 02
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+          - '1'
+          - Fn::GetAZs:
+              Ref: AWS::Region
+      CidrBlock:
+        Ref: PublicSubnet02Block
+      VpcId:
+        Ref: VPC
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-PublicSubnet02"
+
+
+
   server1:
     Type: "AWS::EC2::Instance"
     Properties:
@@ -73,7 +139,7 @@ Resources:
           DeviceIndex: "0"
           GroupSet: 
             - !Ref AnsibleSecurityGroup
-          SubnetId: !Ref Subnet
+          SubnetId: !Ref PublicSubnet01
       BlockDeviceMappings:
         - DeviceName: !Ref RootVolumeName
           Ebs:
@@ -99,7 +165,7 @@ Resources:
           DeviceIndex: "0"
           GroupSet: 
             - !Ref AnsibleSecurityGroup
-          SubnetId: !Ref Subnet2
+          SubnetId: !Ref PublicSubnet02
       BlockDeviceMappings:
         - DeviceName: !Ref RootVolumeName
           Ebs:
@@ -109,11 +175,23 @@ Resources:
             Encrypted: "true"
             KmsKeyId: !Ref EBSkey
 
-  
+
+
+  hostedZone:
+    Type: "AWS::Route53::HostedZone"
+    Properties:
+      HostedZoneConfig:
+        Comment: 'My hosted zone for example.com'
+      Name: 'norahs-eac.com'
+      VPCs:
+        - VPCId:
+            Ref: VPC
+          VPCRegion: 'us-west-2'
+
   server1PrivateDNSRecord:
     Type: AWS::Route53::RecordSet
     Properties:
-      HostedZoneId: !Ref PrivateRoute53HostedZone
+      HostedZoneId: !Ref hostedZone
       Comment: Private DNS entry for server1
       Name: !Ref ServerName
       Type: A
@@ -124,7 +202,7 @@ Resources:
   server2PrivateDNSRecord:
     Type: AWS::Route53::RecordSet
     Properties:
-      HostedZoneId: !Ref PrivateRoute53HostedZone
+      HostedZoneId: !Ref hostedZone
       Comment: Private DNS entry for server2
       Name: !Ref ServerName2
       Type: A

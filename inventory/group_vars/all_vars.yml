@@ -6,7 +6,7 @@ hosting_infrastructure: aws
 aws_region: "us-west-2"
 
 # Define environment name
-env_id: "norahslab"
+env_id: "norahs-eac.com"
 
 # DNS domain
 dns_domain: "{{ env_id }}.com"
