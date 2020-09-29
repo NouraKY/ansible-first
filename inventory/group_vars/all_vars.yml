@@ -1,8 +1,8 @@
 ---
 # Define hosting environment
 hosting_infrastructure: aws
-# Define AWS region. Comment out the one you DO NOT wish to use with #
-#aws_region: "us-east-1"
+# Define AWS region
+
 aws_region: "us-west-2"
 
 # Define environment name
@@ -19,14 +19,11 @@ aws_key_name: "ansible-key"
 
 # Availability zone of resources
 aws_zone: "us-west-2a"
-#aws_zone: "us-east-1b"
-#aws_zone: "us-east-1c"
 
 
 # Second AZ if multi-AZ is needed during cloudformation deployment
-#aws_zone2: "us-east-1a"
 aws_zone2: "us-west-2b"
-#aws_zone2: "us-east-1c"
+
 
 
 

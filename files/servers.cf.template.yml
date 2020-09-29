@@ -2,19 +2,17 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: "CloudFormation template to deploy multiple servers in aws"
 
 Parameters:
-
-
   VpcBlock:
     Type: String
     Default: 192.168.0.0/16
     Description: The CIDR range for the VPC. This should be a valid private (RFC 1918) CIDR range.
 
-  PublicSubnet01Block:
+  Subnet01Block:
     Type: String
     Default: 192.168.0.0/18
     Description: CidrBlock for public subnet 01 within the VPC
 
-  PublicSubnet02Block:
+  Subnet02Block:
     Type: String
     Default: 192.168.64.0/18
     Description: CidrBlock for public subnet 02 within the VPC
@@ -84,7 +82,7 @@ Resources:
         - Key: Name
           Value: !Sub '${AWS::StackName}-VPC'
 
-  PublicSubnet01:
+  Subnet01:
     Type: AWS::EC2::Subnet
     Metadata:
       Comment: Subnet 01
@@ -95,14 +93,14 @@ Resources:
           - Fn::GetAZs:
               Ref: AWS::Region
       CidrBlock:
-        Ref: PublicSubnet01Block
+        Ref: Subnet01Block
       VpcId:
         Ref: VPC1
       Tags:
         - Key: Name
-          Value: !Sub "${AWS::StackName}-PublicSubnet01"
+          Value: !Sub "${AWS::StackName}-Subnet01"
 
-  PublicSubnet02:
+  Subnet02:
     Type: AWS::EC2::Subnet
     Metadata:
       Comment: Subnet 02
@@ -113,12 +111,12 @@ Resources:
           - Fn::GetAZs:
               Ref: AWS::Region
       CidrBlock:
-        Ref: PublicSubnet02Block
+        Ref: Subnet02Block
       VpcId:
         Ref: VPC1
       Tags:
         - Key: Name
-          Value: !Sub "${AWS::StackName}-PublicSubnet02"
+          Value: !Sub "${AWS::StackName}-Subnet02"
 
   server1:
     Type: "AWS::EC2::Instance"
@@ -137,7 +135,7 @@ Resources:
           DeviceIndex: "0"
           GroupSet: 
             - !Ref AnsibleSecurityGroup
-          SubnetId: !Ref PublicSubnet01
+          SubnetId: !Ref Subnet01
       BlockDeviceMappings:
         - DeviceName: !Ref RootVolumeName
           Ebs:
@@ -163,7 +161,7 @@ Resources:
           DeviceIndex: "0"
           GroupSet: 
             - !Ref AnsibleSecurityGroup
-          SubnetId: !Ref PublicSubnet02
+          SubnetId: !Ref Subnet02
       BlockDeviceMappings:
         - DeviceName: !Ref RootVolumeName
           Ebs:

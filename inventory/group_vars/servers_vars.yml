@@ -16,19 +16,8 @@ server_name2: "server02.norahs-eac.com"
 #Type of AWS instance
 aws_instancetype: "t2.medium"
 
-#Establish  server subnets
-subnet: subnet-02b0a3969b70473fb
-subnet2: subnet-03aeeec4c71bb8426
-
 # Establish EBS Encryption key
 ebs_key: "178e6f0c-66df-4d24-b790-7fcfb1420c01"
-
-
-# Establish private Route53 DNS zone
-private_hosted_zone: Z029757430R72KHNBRMF9
-
-# Establish VPC
-vpc_id: vpc-055332e25c151415f
 
 #Disks to attach to instance
 disks:
