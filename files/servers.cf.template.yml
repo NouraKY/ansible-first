@@ -61,7 +61,7 @@ Parameters:
   
 Resources:
 
-  VPC1:
+  VPC:
     Type: AWS::EC2::VPC
     Properties:
       CidrBlock:  !Ref VpcBlock
@@ -84,7 +84,7 @@ Resources:
       CidrBlock:
         Ref: Subnet01Block
       VpcId:
-        Ref: VPC1
+        Ref: VPC
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-Subnet01"
@@ -102,7 +102,7 @@ Resources:
       CidrBlock:
         Ref: Subnet02Block
       VpcId:
-        Ref: VPC1
+        Ref: VPC
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-Subnet02"
@@ -168,7 +168,7 @@ Resources:
       Name: 'norahs-eac.com'
       VPCs:
         - VPCId:
-            Ref: VPC1
+            Ref: VPC
           VPCRegion: 'us-west-2'
 
   server1PrivateDNSRecord:
@@ -198,7 +198,7 @@ Resources:
     Properties:
       GroupName: !Join [ "", [ !Ref EnvId, "-ansible-sg"] ]
       GroupDescription: "Ansible demonstration SG - 22/SSH"
-      VpcId: !Ref VPC1
+      VpcId: !Ref VPC
       SecurityGroupIngress:
       - IpProtocol: tcp
         FromPort: '22'
