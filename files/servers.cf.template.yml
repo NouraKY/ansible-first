@@ -57,18 +57,7 @@ Parameters:
   EBSkey:
     Description: "Key used to encrypt EBS volumes"
     Type: "String"
-  Subnet:
-    Description: "Subnet instance will reside in"
-    Type: "AWS::EC2::Subnet::Id"
-  Subnet2:
-    Description: "Subnet instance will reside in"
-    Type: "AWS::EC2::Subnet::Id"
-  PrivateRoute53HostedZone:
-    Description: "Route53 hosted zone for private DNS"
-    Type: "AWS::Route53::HostedZone::Id"
-  VPC:
-    Description: "VPC of resource"
-    Type: "AWS::EC2::VPC::Id"
+
   
 Resources:
 
